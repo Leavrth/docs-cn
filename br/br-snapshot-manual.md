@@ -134,6 +134,8 @@ tiup br restore full \
 
 备份恢复功能在备份时，将统计信息通过 JSON 格式存储在 `backupmeta` 文件中。在恢复时，将 JSON 格式的统计信息导入到集群中。详情请参考 [LOAD STATS](/sql-statements/sql-statement-load-stats.md)。
 
+从 v9.0.0 起，当恢复的表在备份数据中没有统计信息时，br 命令行工具新增 `--auto-analyze` 参数来控制是否再恢复后触发后台统计信息优先队列对恢复表进行自动收集统计信息任务，默认开启。如果你想要在完成恢复后手动执行 `ANALYZE TABLE` SQL 语句，那么可以设置 `--auto-analyze` 为 false。
+
 ## 备份数据加密
 
 br 命令行工具支持在备份端，或备份到 Amazon S3 的时候在[存储服务端进行备份数据加密](/br/backup-and-restore-storages.md#amazon-s3-存储服务端加密备份数据)，你可以根据自己情况选择其中一种使用。
